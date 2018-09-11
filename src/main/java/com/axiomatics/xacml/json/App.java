@@ -1,4 +1,4 @@
-package com.axiomatics;
+package com.axiomatics.xacml.json;
 
 /**
  * Hello world!

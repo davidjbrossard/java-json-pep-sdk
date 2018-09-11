@@ -14,6 +14,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.json</groupId>
+    	<artifactId>json</artifactId>
+      <version>20180130</version>
+    </dependency>
   </dependencies>
   <description>This project provides a sample PEP SDK for Java that generates a XACML request and response in accordance with the JSON Profile of XACML WD22.</description>
   <organization>
