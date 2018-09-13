@@ -1,4 +1,4 @@
-package com.axiomatics.xacml.json;
+package com.axiomatics.xacml.json.model;
 
 import org.json.JSONObject;
 
