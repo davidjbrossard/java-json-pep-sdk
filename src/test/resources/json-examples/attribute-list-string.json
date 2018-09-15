@@ -1,0 +1,11 @@
+{
+  "Attribute": [
+    {
+      "AttributeId": "urn:oasis:names:tc:xacml:2.0:subject:role",
+      "Value": [
+        "manager",
+        "administrator"
+      ]
+    }
+  ]
+}

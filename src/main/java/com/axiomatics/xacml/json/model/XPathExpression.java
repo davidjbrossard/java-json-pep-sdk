@@ -2,20 +2,15 @@ package com.axiomatics.xacml.json.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Values of the XACML xPathExpression data-type are represented as JSON objects
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class XPathExpression {
 
     @ApiModelProperty(
@@ -23,18 +18,31 @@ public class XPathExpression {
         required = true
     )
     @JsonProperty("XPathCategory")
-    String xPathCategory;
+    String xpathCategory;
 
     @ApiModelProperty(
         example = "[{\"Namespace\": \"urn:oasis:names:tc:xacml:3.0:core:schema:wd-17\"}]"
     )
     @JsonProperty("Namespaces")
-    List<NamespaceDeclaration> namespaces;
+    final List<NamespaceDeclaration> namespaceDeclarations = new ArrayList<>();
 
     @ApiModelProperty(
         example = "md:record/md:patient/md:patientDoB",
         required = true
     )
     @JsonProperty("XPath")
-    String xPath;
+    String xpath;
+
+    public XPathExpression(String xpathCategory, String xpath) {
+        this.xpathCategory = xpathCategory;
+        this.xpath = xpath;
+    }
+
+    public boolean addNamespaceDeclaration(String namespace) {
+        return namespaceDeclarations.add(new NamespaceDeclaration(namespace));
+    }
+
+    public boolean addNamespaceDeclaration(String namespace, String prefix) {
+        return namespaceDeclarations.add(new NamespaceDeclaration(namespace, prefix));
+    }
 }

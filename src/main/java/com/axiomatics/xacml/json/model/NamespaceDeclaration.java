@@ -2,18 +2,12 @@ package com.axiomatics.xacml.json.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class NamespaceDeclaration {
 
     @ApiModelProperty(
@@ -22,12 +16,10 @@ public class NamespaceDeclaration {
     @JsonProperty("Prefix")
     String prefix;
 
-
     @ApiModelProperty(
         example = "urn:example:med:schemas:record",
         required = true
     )
-    @NonNull
     @JsonProperty("Namespace")
     String namespace;
 
@@ -35,9 +27,9 @@ public class NamespaceDeclaration {
         this.namespace = namespace;
     }
 
-    public NamespaceDeclaration(String prefix, String namespace) {
-        this.prefix = prefix;
+    public NamespaceDeclaration(String namespace, String prefix) {
         this.namespace = namespace;
+        this.prefix = prefix;
     }
 
 }
