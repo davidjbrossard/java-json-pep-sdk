@@ -14,7 +14,10 @@ import java.util.List;
 @ApiModel("The Response Body Wrapper")
 public class Response {
 
-    @ApiModelProperty(value = "A sequence of one or more results, with one Result element per requested resource.")
+    /**
+     * A sequence of one or more results, with one {@link Result} member per requested resource
+     */
+    @ApiModelProperty(value = "A sequence of one or more results, with one Result member per requested resource.")
     @JsonProperty("Response")
     List<Result> results;
 

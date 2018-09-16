@@ -41,56 +41,95 @@ public class Request {
     boolean combinedDecision = false;
 
     /**
-     * The xpath version
+     * The XPath version
      */
     @ApiModelProperty(notes = "The xpath version. Mandatory if the XACML request contains XPath expressions; otherwise, optional.")
     @JsonProperty("XPathVersion")
     String xpathVersion;
 
-    @ApiModelProperty(notes = "Optional, but see section 4.2.2.2.")
+    /**
+     * Collection of custom-defined attribute categories. Optional
+     */
+    @ApiModelProperty(notes = "Collection of custom-defined attribute categories. Optional")
     @JsonProperty("Category")
     List<Category> customCategories = new ArrayList<>();
 
-    @ApiModelProperty(value = "Collection of resource-related attributes", notes = "Optional, but see section 4.2.2.2.")
+    /**
+     * Collection of resource-related attribute categories
+     */
+    @ApiModelProperty(value = "Collection of resource-related attribute categories. Optional")
     @JsonProperty("Resource")
     List<Category> resourceCategories = new ArrayList<>();
 
-    @ApiModelProperty(value = "Collection of action-related attributes", notes = "Optional, but see section 4.2.2.2.")
+    /**
+     * Collection of action-related attribute categories. Optional
+     */
+    @ApiModelProperty(value = "Collection of action-related attribute categories. Optional")
     @JsonProperty("Action")
     List<Category> actionCategories = new ArrayList<>();
 
-    @ApiModelProperty(value = "Collection of environment-related attributes", notes = "Optional, but see section 4.2.2.2.")
+    /**
+     * Collection of environment-related attribute categories. Optional
+     */
+    @ApiModelProperty(value = "Collection of environment-related attribute categories. Optional")
     @JsonProperty("Environment")
     List<Category> environmentCategories = new ArrayList<>();
 
-    @ApiModelProperty(value = "Collection of subject-related attributes. The subject is the system entity that initiated the access request. " +
-        "That is, the initial entity in a request chain. Optional, but see section 4.2.2.2.")
+    /**
+     * Collection of subject-related attribute categories. Optional
+     *
+     * The subject is the system entity that initiated the access request. That is, the initial entity in a request chain.
+     */
+    @ApiModelProperty(value = "Collection of subject-related attribute categories. The subject is the system entity that initiated the access request. " +
+        "That is, the initial entity in a request chain. Optional")
     @JsonProperty("AccessSubject")
     List<Category> accessSubjectCategories = new ArrayList<>();
 
+    /**
+     * Collection of recipient-related attribute categories. Optional
+     *
+     * The recipient subject is the system entity that will receive the results of the request (used when it is distinct from the access-subject).
+     */
     @ApiModelProperty(notes = "Collection of recipient-related attributes. The recipient subject is the system entity that will receive the results " +
-        "of the request (used when it is distinct from the access-subject)Optional, but see section 4.2.2.2.")
+        "of the request (used when it is distinct from the access-subject). Optional")
     @JsonProperty("RecipientSubject")
     List<Category> recipientSubjectCategories = new ArrayList<>();
 
+    /**
+     * Collection of intermediary-subject-related attribute categories. Optional
+     *
+     * The intermediary subject is the system entity through which the access request was passed.
+     */
     @ApiModelProperty(notes = "Collection of intermediary-subject-related attributes. The intermediary subject is the system entity through which " +
-        "the access request was passed. Optional, but see section 4.2.2.2.")
+        "the access request was passed. Optional")
     @JsonProperty("IntermediarySubject")
     List<Category> intermediarySubjectCategories = new ArrayList<>();
 
+    /**
+     * Collection of codebase-related attributes.  Optional
+     *
+     * The codebase a system entity associated with a local or remote codebase that generated the request. Corresponding subject attributes might
+     * include the URL from which it was loaded and/or the identity of the code-signer.
+     */
     @ApiModelProperty(notes = "Collection of codebase-related attributes. The codebase a system entity associated with a local or remote codebase " +
         "that generated the request. Corresponding subject attributes might include the URL from which it was loaded and/or the identity of the " +
-        "code-signer. Optional, but see section 4.2.2.2.")
+        "code-signer. Optional")
     @JsonProperty("CodeBase")
     List<Category> codeBaseCategories = new ArrayList<>();
 
+    /**
+     * Collection of requesting-machine-related attributes. Optional
+     *
+     * The intermediary subject This identifier is a system entity associated with the computer that initiated the access request. An example
+     * would be an IPsec identity.
+     */
     @ApiModelProperty(notes = "Collection of requesting-machine-related attributes. The intermediary subject This identifier is a system entity " +
-        "associated with the computer that initiated the access request. An example would be an IPsec identity. Optional, but see section 4.2.2.2.")
+        "associated with the computer that initiated the access request. An example would be an IPsec identity. Optional")
     @JsonProperty("RequestingMachine")
     List<Category> requestingMachineCategories = new ArrayList<>();
 
     /**
-     * Lists multiple request contexts by references to the Category members. Optional
+     * Lists multiple request contexts by references to the various lists of {@link Category} that are members of a {@link Request}. Optional
      */
     @ApiModelProperty(notes = "Lists multiple request contexts by references to the Category members. Optional")
     @JsonProperty("MultiRequests")

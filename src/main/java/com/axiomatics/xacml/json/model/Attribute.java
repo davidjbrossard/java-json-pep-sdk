@@ -41,7 +41,7 @@ public class Attribute {
      */
     @ApiModelProperty(
         value = "The Attribute identifier",
-        example = "urn:oasis:names:tc:xacml:2.0:subject:role",
+        example = "com.acme.record.recordId",
         required = true
     )
     @JsonProperty("AttributeId")
@@ -55,7 +55,7 @@ public class Attribute {
      */
     @ApiModelProperty(
         value = "One or more attribute values",
-        example = "acmeId-001",
+        example = "some-attribute-value",
         required = true
     )
     @JsonProperty("Value")
@@ -70,9 +70,8 @@ public class Attribute {
      * 3.3.1 Supported Data Types. In the case of an array of values, inference works as described in section 3.3.2.
      */
     @ApiModelProperty(
-        value = "A string containing a XACML data type URI or the shorthand notation defined in section 3.3.1.\n" +
-            "The default value will be http://www.w3.org/2001/XMLSchema#string unless the data type can be safely assumed to be otherwise according " +
-            "to the rules set in sections 3.3.1 and 3.3.2.",
+        value = "A string containing a XACML data type URI or the shorthand notation defined.\n" +
+            "The default value will be http://www.w3.org/2001/XMLSchema#string unless the data type can be safely assumed to be otherwise",
         example = "http://www.w3.org/2001/XMLSchema#string"
     )
     @JsonProperty("DataType")

@@ -20,18 +20,27 @@ import java.util.List;
 @Data
 public class Status {
 
+    /**
+     * The status code
+     */
     @ApiModelProperty(
-        value = "Status code"
+        value = "The status code"
     )
     @JsonProperty("StatusCode")
     StatusCode statusCode;
 
+    /**
+     * A free-form description of the status code
+     */
     @ApiModelProperty(
         value = "A free-form description of the status code"
     )
     @JsonProperty("StatusMessage")
     String statusMessage;
 
+    /**
+     * Additional status information
+     */
     @ApiModelProperty(
         value = "Additional status information"
     )

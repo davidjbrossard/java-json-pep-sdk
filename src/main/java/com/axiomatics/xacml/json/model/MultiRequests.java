@@ -3,7 +3,6 @@ package com.axiomatics.xacml.json.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,9 @@ import java.util.List;
 //@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class MultiRequests {
 
+    /**
+     * References to @{link Category} members for a {@link Request}
+     */
     @ApiModelProperty(
         value = "References to Category members for the request",
         example = "[{\"ReferenceId\":[\"foo1\",\"bar1\"]}]",

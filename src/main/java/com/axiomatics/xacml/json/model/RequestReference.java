@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Defines an instance of a request in terms of {@link Category} members.
+ * Defines an instance of a {@link Request} in terms of {@link Category} members.
  * <p>
  * Each of the {@link #referenceIds} matches a {@link Category#id} in a {@link Request}.
  */
@@ -23,8 +23,11 @@ public class RequestReference {
         this.referenceIds = referenceIds;
     }
 
+    /**
+     * An array of one or more strings, where each string MUST be the value of a {@link Category#id}, that is a member of a {@link Request}.
+     */
     @ApiModelProperty(
-        value = "An array of one or more strings. Each string MUST be the value of a Category object’s \"Id\" member.",
+        value = "An array of one or more strings, where each string MUST be the value of a {@link Category#id}, that is a member of a {@link Request}",
         example = "[\"foo2\",\"bar1\"]",
         required = true
     )
