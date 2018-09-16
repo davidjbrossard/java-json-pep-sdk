@@ -1,12 +1,9 @@
 package com.axiomatics.xacml.json.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * The status of the authorization decision result.
@@ -45,6 +42,6 @@ public class Status {
         value = "Additional status information"
     )
     @JsonProperty("StatusDetail")
-    List<JSONPObject> statusDetail;
+    Object[] statusDetail;
 
 }
