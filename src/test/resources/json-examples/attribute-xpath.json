@@ -1,0 +1,21 @@
+{
+  "Attribute": [
+    {
+      "AttributeId": "urn:oasis:names:tc:xacml:3.0:content-selector",
+      "DataType": "xpathExpression",
+      "Value": {
+        "XPathCategory": "urn:oasis:names:tc:xacml:3.0:attribute-category:resource",
+        "Namespaces": [
+          {
+            "Namespace": "urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"
+          },
+          {
+            "Prefix": "md",
+            "Namespace": "urn:example:med:schemas:record"
+          }
+        ],
+        "XPath": "md:record/md:patient/md:patientDoB"
+      }
+    }
+  ]
+}

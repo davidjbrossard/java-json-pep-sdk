@@ -1,5 +1,13 @@
+### Eclipse
 .classpath
 .project
 .settings/
-bin/
 /target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+bin/

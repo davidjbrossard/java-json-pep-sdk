@@ -1,0 +1,9 @@
+{
+  "Attribute": [
+    {
+      "AttributeId": "document-id",
+      "DataType": "integer",
+      "Value": 123
+    }
+  ]
+}
