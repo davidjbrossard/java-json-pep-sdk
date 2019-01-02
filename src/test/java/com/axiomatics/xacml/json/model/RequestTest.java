@@ -27,7 +27,7 @@ public class RequestTest
     }
 
     /**
-     * Rigourous Test :-)
+     * Rigorous Test :-)
      */
     public void testApp() {
         assertTrue(true);
