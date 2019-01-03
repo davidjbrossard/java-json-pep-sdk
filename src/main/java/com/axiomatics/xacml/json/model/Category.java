@@ -1,5 +1,6 @@
 package com.axiomatics.xacml.json.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Specifies attributes of a Category (like subject, resource, action, environment or another category) by listing a sequence of {@link Attribute}s
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @ApiModel("Specifies attributes of a Category (like subject, resource, action, environment or another category) by listing a sequence of Attributes")
 @Data
 public class Category {
@@ -31,7 +33,8 @@ public class Category {
     @ApiModelProperty(
         value = "A string containing a XACML category URI or the shorthand notation defined in section 4.2.2.1. " +
             "Mandatory for a Category object in the \"Category\" member array; otherwise, optional. ",
-        example = "urn:oasis:names:tc:xacml:2.0:subject:role"
+        example = "urn:oasis:names:tc:xacml:2.0:subject:role",
+        required = false
     )
     @JsonProperty("CategoryId")
     String categoryId;

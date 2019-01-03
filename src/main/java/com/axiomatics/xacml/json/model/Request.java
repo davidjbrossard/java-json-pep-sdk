@@ -1,14 +1,15 @@
 package com.axiomatics.xacml.json.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The Request Body for PDP Authorize Requests
@@ -16,7 +17,7 @@ import java.util.List;
 @Data
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@ApiModel("The Request Body for PDP Authorize Requests")
+@ApiModel("The Request Body for PDP XACML Authorize Requests")
 public class Request {
 
     /**
@@ -170,4 +171,5 @@ public class Request {
     public boolean addRequestingMachineCategories(Category category) {
         return requestingMachineCategories.add(category);
     }
+    
 }
