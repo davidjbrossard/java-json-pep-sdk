@@ -92,7 +92,7 @@
 	</scm>
 	<properties>
 		<!-- marshalling -->
-		<jackson.version>2.9.6</jackson.version>
+		<jackson.version>[2.9.8,)</jackson.version>
 		<jersey.version>2.27</jersey.version>
 		<jersey-h2.version>2.27</jersey-h2.version>
 		<junit.version>4.12</junit.version>
