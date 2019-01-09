@@ -1,8 +1,19 @@
-package com.axiomatics.xacml.json.model;
+package io.xacml.json.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.xacml.json.model.Category;
+import io.xacml.json.model.MultiRequests;
+import io.xacml.json.model.PDPDecision;
+import io.xacml.json.model.Request;
+import io.xacml.json.model.Response;
+import io.xacml.json.model.Result;
+import io.xacml.json.model.Status;
+import io.xacml.json.model.StatusCode;
+import io.xacml.json.model.XPathExpression;
+
 import org.junit.Before;
 import org.junit.Test;
 

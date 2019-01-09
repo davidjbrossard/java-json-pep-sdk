@@ -1,4 +1,4 @@
-package com.axiomatics.xacml.json.model;
+package io.xacml.json.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

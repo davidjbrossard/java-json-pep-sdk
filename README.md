@@ -21,7 +21,7 @@ subject.addAttribute(new Attribute("username", "Alice"));
 // Add user attributes to the request.
 xacmlRequest.addAccessSubjectCategory(subject);
 Response response = builder.post(Entity.entity(xacmlRequest, "application/xacml+json"));
-com.axiomatics.xacml.json.model.Response xacmlResponse = response.readEntity(com.axiomatics.xacml.json.model.Response.class);
+io.xacml.json.model.Response xacmlResponse = response.readEntity(io.xacml.json.model.Response.class);
 for (Result r : xacmlResponse.getResults()) {
     System.out.println(r.getDecision());
 }

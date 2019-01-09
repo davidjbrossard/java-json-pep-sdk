@@ -1,4 +1,4 @@
-package com.axiomatics.xacml.json.model;
+package io.xacml.json.model;
 
 import java.util.ArrayList;
 import java.util.List;

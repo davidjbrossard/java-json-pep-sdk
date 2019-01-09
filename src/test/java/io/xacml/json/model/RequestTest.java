@@ -1,4 +1,4 @@
-package com.axiomatics.xacml.json.model;
+package io.xacml.json.model;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
