@@ -1,5 +1,5 @@
 # Java JSON PEP SDK for XACML
-NOTE: This is currently in development.
+NOTE: This project is currently in development.
 This project provides a sample PEP SDK for Java that generates a XACML request and response in accordance with the JSON Profile of XACML WD22.
 It can then be used to POST a request to a Policy Decision Point such as the Axiomatics Cloud Native PDP.
 ## How to Use the SDK
