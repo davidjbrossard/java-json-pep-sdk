@@ -17,7 +17,9 @@ public interface ClientConfiguration {
     String getPdpUrl();
 
     /**
-     * The username of the PEP user who can access the pdp for policy decisions
+     * The username of the PEP user who can access the pdp for policy decisions.
+     * <p>
+     * Should be provided if Basic Authentication is required for PDP requests.
      * <p>
      * ex: pep-user
      */
