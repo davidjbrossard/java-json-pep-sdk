@@ -1,28 +1,29 @@
 # Java JSON PEP SDK for XACML
-NOTE: This project is currently in development.
-This project provides a sample PEP SDK for Java that generates a XACML request and response in accordance with the JSON Profile of XACML WD22.
-It can then be used to POST a request to a Policy Decision Point such as the Axiomatics Cloud Native PDP.
+
+**NOTE: This project is currently in development.**
+This project provides a sample PEP SDK for Java, that generates a XACML request and response in accordance with the 
+JSON Profile of XACML WD22.
+The project is organized into a number of submodule projects using Apache Maven. Please see their brief descriptions 
+below, or see the submodule project's READMEs.
+
+The `models` can be used to `POST` a request to a Policy Decision Point (such as the Axiomatics Cloud Native PDP), 
+using the client of your choice.
+
+Examples of clients are provided int the `client-*` projects
+
+## Project Contents
+- [Client-Core](client-core) 
+- [Client-JaxRs](client-jaxrs)
+- [Client-Feign](client-feign)
+- [Example code using clients and models](examples)
+- [Models](models)
+
+More information can be found at [OASIS's Working Definition (22) of the XACML Specification][XACML-WD22]
+
 ## How to Use the SDK
 
+See example code in [`examples`]() subproject
 
-```java
-// Enable, if needed, basic authentication
-HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic("ads-user", "secret");
-Client client = ClientBuilder.newClient();
-client.register(feature);
-WebTarget webTarget = client.target("http://djob-hp:8080/asm-pdp/authorize");
-Invocation.Builder builder = webTarget.request("application/xacml+json");
-
-// Start building the XACML request.
-Request xacmlRequest = new Request();
-// Create user attributes
-Category subject = new Category();
-subject.addAttribute(new Attribute("username", "Alice"));
-// Add user attributes to the request.
-xacmlRequest.addAccessSubjectCategory(subject);
-Response response = builder.post(Entity.entity(xacmlRequest, "application/xacml+json"));
-io.xacml.json.model.Response xacmlResponse = response.readEntity(io.xacml.json.model.Response.class);
-for (Result r : xacmlResponse.getResults()) {
-    System.out.println(r.getDecision());
-}
-```
+## Future work
+- Java Builders for the request-related models to assist in creation of requests
+- Kotlin Builder to provide a DSL-style builder, useful in testing. 
