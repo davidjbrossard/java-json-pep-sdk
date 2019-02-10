@@ -2,10 +2,10 @@
 .classpath
 .project
 .settings/
-/target/
+**/target/
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr

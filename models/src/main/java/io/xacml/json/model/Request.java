@@ -1,15 +1,15 @@
 package io.xacml.json.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.beans.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Request Body for PDP Authorize Requests
@@ -27,7 +27,7 @@ public class Request {
      * Defaults to false if not specified
      */
     @ApiModelProperty(example = "false", notes = "This attribute is used to request that the PDP return a list of all fully applicable policies and " +
-        "policy sets which were used in the decision as a part of the decision response. Defaults to false if not specified")
+            "policy sets which were used in the decision as a part of the decision response. Defaults to false if not specified")
     @JsonProperty("ReturnPolicyIdList")
     boolean returnPolicyIdList = false;
 
@@ -37,7 +37,7 @@ public class Request {
      * Defaults to false if not specified
      */
     @ApiModelProperty(example = "false", notes = "This attribute is used to request that the PDP combines multiple decisions into a single decision." +
-        "Defaults to false if not specified")
+            "Defaults to false if not specified")
     @JsonProperty("CombinedDecision")
     boolean combinedDecision = false;
 
@@ -78,54 +78,54 @@ public class Request {
 
     /**
      * Collection of subject-related attribute categories. Optional
-     *
+     * <p>
      * The subject is the system entity that initiated the access request. That is, the initial entity in a request chain.
      */
     @ApiModelProperty(value = "Collection of subject-related attribute categories. The subject is the system entity that initiated the access request. " +
-        "That is, the initial entity in a request chain. Optional")
+            "That is, the initial entity in a request chain. Optional")
     @JsonProperty("AccessSubject")
     List<Category> accessSubjectCategories = new ArrayList<>();
 
     /**
      * Collection of recipient-related attribute categories. Optional
-     *
+     * <p>
      * The recipient subject is the system entity that will receive the results of the request (used when it is distinct from the access-subject).
      */
     @ApiModelProperty(notes = "Collection of recipient-related attributes. The recipient subject is the system entity that will receive the results " +
-        "of the request (used when it is distinct from the access-subject). Optional")
+            "of the request (used when it is distinct from the access-subject). Optional")
     @JsonProperty("RecipientSubject")
     List<Category> recipientSubjectCategories = new ArrayList<>();
 
     /**
      * Collection of intermediary-subject-related attribute categories. Optional
-     *
+     * <p>
      * The intermediary subject is the system entity through which the access request was passed.
      */
     @ApiModelProperty(notes = "Collection of intermediary-subject-related attributes. The intermediary subject is the system entity through which " +
-        "the access request was passed. Optional")
+            "the access request was passed. Optional")
     @JsonProperty("IntermediarySubject")
     List<Category> intermediarySubjectCategories = new ArrayList<>();
 
     /**
      * Collection of codebase-related attributes.  Optional
-     *
+     * <p>
      * The codebase a system entity associated with a local or remote codebase that generated the request. Corresponding subject attributes might
      * include the URL from which it was loaded and/or the identity of the code-signer.
      */
     @ApiModelProperty(notes = "Collection of codebase-related attributes. The codebase a system entity associated with a local or remote codebase " +
-        "that generated the request. Corresponding subject attributes might include the URL from which it was loaded and/or the identity of the " +
-        "code-signer. Optional")
+            "that generated the request. Corresponding subject attributes might include the URL from which it was loaded and/or the identity of the " +
+            "code-signer. Optional")
     @JsonProperty("CodeBase")
     List<Category> codeBaseCategories = new ArrayList<>();
 
     /**
      * Collection of requesting-machine-related attributes. Optional
-     *
+     * <p>
      * The intermediary subject This identifier is a system entity associated with the computer that initiated the access request. An example
      * would be an IPsec identity.
      */
     @ApiModelProperty(notes = "Collection of requesting-machine-related attributes. The intermediary subject This identifier is a system entity " +
-        "associated with the computer that initiated the access request. An example would be an IPsec identity. Optional")
+            "associated with the computer that initiated the access request. An example would be an IPsec identity. Optional")
     @JsonProperty("RequestingMachine")
     List<Category> requestingMachineCategories = new ArrayList<>();
 
@@ -171,5 +171,9 @@ public class Request {
     public boolean addRequestingMachineCategories(Category category) {
         return requestingMachineCategories.add(category);
     }
-    
+
+    @Transient
+    public boolean isMultiDecisionProfileRequest() {
+        return null != multiRequests;
+    }
 }
