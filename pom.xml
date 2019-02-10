@@ -9,6 +9,9 @@
     <name>json-pep-sdk</name>
     <url>http://maven.apache.org</url>
     <modules>
+        <module>client-core</module>
+        <module>client-feign</module>
+        <module>client-jaxrs</module>
         <module>examples</module>
         <module>models</module>
     </modules>
@@ -77,7 +80,7 @@
         <jersey-h2.version>2.27</jersey-h2.version>
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.2</lombok.version>
-        <!--<swagger-maven-plugin-versio    n>3.1.8</swagger-maven-plugin-version>-->
+        <!--<swagger-maven-plugin-version>3.1.8</swagger-maven-plugin-version>-->
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>

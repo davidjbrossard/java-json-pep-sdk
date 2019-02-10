@@ -8,22 +8,31 @@
         <artifactId>json-pep-sdk</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>examples</artifactId>
+    <artifactId>json-pep-sdk-client-jaxrs</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>examples</name>
+    <name>json-pep-sdk-client-jaxrs</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>io.xacml</groupId>
-            <artifactId>json-pep-sdk-client-jaxrs</artifactId>
+            <artifactId>json-pep-sdk-client-core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.xacml</groupId>
-            <artifactId>json-pep-sdk-client-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -8,22 +8,31 @@
         <artifactId>json-pep-sdk</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>examples</artifactId>
+    <artifactId>json-pep-sdk-client-feign</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>examples</name>
+    <name>json-pep-sdk-client-feign</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>io.xacml</groupId>
-            <artifactId>json-pep-sdk-client-jaxrs</artifactId>
+            <artifactId>json-pep-sdk-client-core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.xacml</groupId>
-            <artifactId>json-pep-sdk-client-feign</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
+            <version>${feign.version}</version>
         </dependency>
     </dependencies>
 </project>
