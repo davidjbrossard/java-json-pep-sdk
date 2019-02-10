@@ -10,7 +10,7 @@
     </parent>
     <artifactId>json-pep-sdk-client-jaxrs</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>json-pep-sdk-client-jaxrs</name>
+    <name>client-jaxrs</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
