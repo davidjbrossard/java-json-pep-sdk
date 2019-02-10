@@ -10,7 +10,7 @@
     </parent>
     <artifactId>json-pep-sdk-models</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>json-pep-sdk-models</name>
+    <name>models</name>
     <url>http://maven.apache.org</url>
     <packaging>jar</packaging>
     <dependencies>

@@ -10,7 +10,7 @@
     </parent>
     <artifactId>json-pep-sdk-client-feign</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>json-pep-sdk-client-feign</name>
+    <name>client-feign</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
