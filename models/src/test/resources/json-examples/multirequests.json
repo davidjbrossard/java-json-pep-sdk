@@ -1,0 +1,22 @@
+{
+  "RequestReference": [
+    {
+      "ReferenceId": [
+        "foo1",
+        "bar1"
+      ]
+    },
+    {
+      "ReferenceId": [
+        "foo2",
+        "bar1"
+      ]
+    },
+    {
+      "ReferenceId": [
+        "foo3",
+        "bar1"
+      ]
+    }
+  ]
+}
