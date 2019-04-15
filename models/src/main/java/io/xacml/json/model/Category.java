@@ -33,7 +33,7 @@ public class Category {
     @ApiModelProperty(
         value = "A string containing a XACML category URI or the shorthand notation defined in section 4.2.2.1. " +
             "Mandatory for a Category object in the \"Category\" member array; otherwise, optional. ",
-        example = "urn:oasis:names:tc:xacml:2.0:subject:role",
+        example = "urn:oasis:names:tc:xacml:1.0:subject-category:intermediary-subject",
         required = false
     )
     @JsonProperty("CategoryId")
@@ -65,7 +65,7 @@ public class Category {
      * In addition, since the XML content could itself contain backslashes and possibly the sequence \", it is important to also
      * escape backslashes.
      * <p>
-     * In the case of Base64 encoding, the XML content shall be converted to its Base64 representation as per [BASE64
+     * In the case of Base64 encoding, the XML content shall be converted to its Base64 representation.
      */
     @ApiModelProperty(
         value = "Specifies additional sources of attributes in free form XML document format",
