@@ -9,7 +9,7 @@ The [REST Profile of XACML v3.0 Version 1.0](http://docs.oasis-open.org/xacml/xa
 This specification defines a profile for the use of XACML in a RESTful architecture, enabling the interoperability of RESTful Authorization-as-a-Service (AZaaS) solutions. The MIME media types [Media] available for representations of the various XACML constructs are defined separately [XACMLMedia]. [source](http://docs.oasis-open.org/xacml/xacml-rest/v1.0/cos01/xacml-rest-v1.0-cos01.html#_Toc399235410)
 ## Examples
 ### JSON XACML Request
-`{
+```json{
     "Request": {
         "AccessSubject": [{
             "Attribute": [
@@ -40,9 +40,9 @@ This specification defines a profile for the use of XACML in a RESTful architect
             ]
         }]
     }
-}`
+}```
 ### JSON XACML Response
-`{
+```json{
     "Response": {
         "Decision": "Permit",
         "Status": {
@@ -54,4 +54,4 @@ This specification defines a profile for the use of XACML in a RESTful architect
             }
         }
     }
-}`
+}```
