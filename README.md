@@ -1,8 +1,7 @@
 # Java JSON PEP SDK for XACML
 
-**NOTE: This project is currently in development.**
-This project provides a sample PEP SDK for Java, that generates a XACML request and response in accordance with the 
-JSON Profile of XACML WD22.
+This project provides a PEP SDK for Java, that generates a XACML request and response in accordance with the 
+JSON Profile of XACML 1.1.
 The project is organized into a number of submodule projects using Apache Maven. Please see their brief descriptions 
 below, or see the submodule project's READMEs.
 
@@ -18,7 +17,7 @@ Examples of clients are provided int the `client-*` projects
 - [Example code using clients and models](examples)
 - [Models](models)
 
-More information can be found at [OASIS's Working Definition (22) of the XACML Specification][XACML-WD22]
+More information can be found at [OASIS's JSON Profile of XACML v 1.1](http://docs.oasis-open.org/xacml/xacml-json-http/v1.1/xacml-json-http-v1.1.html).
 
 ## How to Use the SDK
 
