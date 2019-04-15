@@ -7,6 +7,7 @@ XACML, the eXtensible Access Control Markup Language, is the de-facto standard f
 The [REST Profile of XACML v3.0 Version 1.0](http://docs.oasis-open.org/xacml/xacml-rest/v1.0/xacml-rest-v1.0.html) defines a standard means to POST a XACML authorization request either in XML or JSON to a XACML 3.0-compliant authorization service.
 > Due to the pervasive nature of access control, Authorization-as-a-Service will result in many calls to the authorization servers. These servers must therefore perform and scale extremely well. Thus it makes sense to use a RESTful architecture for them.
 This specification defines a profile for the use of XACML in a RESTful architecture, enabling the interoperability of RESTful Authorization-as-a-Service (AZaaS) solutions. The MIME media types [Media] available for representations of the various XACML constructs are defined separately [XACMLMedia]. [source](http://docs.oasis-open.org/xacml/xacml-rest/v1.0/cos01/xacml-rest-v1.0-cos01.html#_Toc399235410)
+
 ## Examples
 ### JSON XACML Request
 ```json
