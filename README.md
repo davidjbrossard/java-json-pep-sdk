@@ -21,7 +21,7 @@ More information can be found at [OASIS's JSON Profile of XACML v 1.1](http://do
 
 ## How to Use the SDK
 
-See example code in the [Examples] subproject
+See example code in the [examples] subproject
 
 ## Future work
 - Java Builders for the request-related models to assist in creation of requests
