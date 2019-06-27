@@ -36,4 +36,26 @@ public class AttributeAssignment {
     )
     @JsonProperty("Value")
     String value;
+    
+    /**
+     * The {@link Category} identifier
+     */
+    @ApiModelProperty(
+    		value = "The Attribute assignment category (optional)",
+    		example = "resource",
+    		required = false
+    		)
+    @JsonProperty("Category")
+    String category;
+    
+    /**
+     * The {@link Datatype} identifier
+     */
+    @ApiModelProperty(
+    		value = "The Attribute assignment's datatype (optional)",
+    		example = "string",
+    		required = false
+    		)
+    @JsonProperty("DataType")
+    String datatype;
 }
