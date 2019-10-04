@@ -5,6 +5,7 @@ import io.xacml.json.model.*;
 import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
 import io.xacml.pep.json.client.DefaultClientConfiguration;
+import io.xacml.pep.json.client.feign.FeignAuthZClient;
 import io.xacml.pep.json.client.jaxrs.JaxRsAuthZClient;
 import lombok.extern.slf4j.Slf4j;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -44,7 +45,7 @@ public class AuthZClientExamples {
     }
 
     private static void callPDPWithFeignClient(ClientConfiguration clientConfiguration, ObjectMapper mapper, Request request) {
-        AuthZClient authZClient = new JaxRsAuthZClient(clientConfiguration, mapper);
+        AuthZClient authZClient = new FeignAuthZClient(clientConfiguration, mapper);
         Response xacmlResponse = authZClient.makeAuthorizationRequest(request);
         for (Result r : xacmlResponse.getResults()) {
             log.debug("Decision: {}", r.getDecision());
