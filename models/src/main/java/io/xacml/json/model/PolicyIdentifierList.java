@@ -1,5 +1,6 @@
 package io.xacml.json.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,6 +20,7 @@ public class PolicyIdentifierList {
      */
     @ApiModelProperty(value = "List of policy id references of policies which have been applicable to the request")
     @JsonProperty("PolicyIdReference")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<IdReference> policyIdReferences;
 
     /**

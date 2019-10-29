@@ -1,5 +1,6 @@
 package io.xacml.json.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,5 +25,6 @@ public class ObligationOrAdvice {
      */
     @ApiModelProperty(value = "Used for including arguments in obligation and advice expressions")
     @JsonProperty("AttributeAssignment")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<AttributeAssignment> attributeAssignments;
 }
