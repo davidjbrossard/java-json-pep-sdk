@@ -8,7 +8,6 @@ import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 import io.xacml.json.model.Request;
 import io.xacml.json.model.Response;
-import io.xacml.json.model.SingleResponse;
 import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
 
@@ -45,26 +44,14 @@ public class FeignAuthZClient implements AuthZClient {
     /**
      * Sends the request object to the PDP and returns the response from PDP
      * <p>
-     * Response object will be in the format of JSON Profile of XACML 1.1 (where the response is always an array -
-     * to simplify things).
-     * <p>
-     * Implementations are free to support the JSON Profile of XACML 1.0 (where the response could be either an
-     * Object or an Array), which is modeled with {@link SingleResponse}. However, they should map
-     * the {@link SingleResponse} to a {@link Response} to simplify PEP response parsing
+     * The Response object is in the format of JSON Profile of XACML 1.1,
+     * where the response contains an array of results.
      *
      * @param request the XACML request object
      * @return the response object
      */
     @Override
     public Response makeAuthorizationRequest(Request request) {
-        Response response;
-        //TODO: will need to handle case of V1.1 vs V1.0 service invocation
-        if (request.isMultiDecisionProfileRequest()) {
-            response = pdpFeignClient.getResponse(request);
-        } else {
-            SingleResponse singleResponse = pdpFeignClient.getSingleResponse(request);
-            response = mapSingleResultToResponse(singleResponse.getResult());
-        }
-        return response;
+        return pdpFeignClient.getResponse(request);
     }
 }

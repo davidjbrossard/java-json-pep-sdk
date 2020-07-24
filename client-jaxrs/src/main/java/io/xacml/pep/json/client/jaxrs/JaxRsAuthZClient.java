@@ -1,13 +1,8 @@
 package io.xacml.pep.json.client.jaxrs;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.xacml.json.model.Request;
 import io.xacml.json.model.Response;
-import io.xacml.json.model.Result;
-import io.xacml.json.model.SingleResponse;
 import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
 import io.xacml.pep.json.client.ResponseParsingException;
@@ -73,12 +68,8 @@ public class JaxRsAuthZClient implements AuthZClient {
     /**
      * Sends the request object to the PDP and returns the response from PDP
      * <p>
-     * Response object will be in the format of JSON Profile of XACML 1.1 (where the response is always an array -
-     * to simplify things).
-     * <p>
-     * Implementations are free to support the JSON Profile of XACML 1.0 (where the response could be either an
-     * Object or an Array), which is modeled with {@link SingleResponse}. However, they should map
-     * the {@link SingleResponse} to a {@link Response} to simplify PEP response parsing
+     * The Response object is in the format of JSON Profile of XACML 1.1,
+     * where the response contains an array of results.
      *
      * @param request the XACML request object
      * @return the response object
@@ -87,41 +78,10 @@ public class JaxRsAuthZClient implements AuthZClient {
     public Response makeAuthorizationRequest(Request request) {
         javax.ws.rs.core.Response response = requestInvocationBuilder.post(Entity.entity(request, CONTENT_TYPE));
 
-        JsonNode jsonNode = null;
         try {
-            jsonNode = mapper.readTree((InputStream) response.getEntity());
+            return mapper.readValue((InputStream) response.getEntity(), Response.class);
         } catch (IOException e) {
             throw new ResponseParsingException("Could not read the response as a JSON node", e);
         }
-
-        return mapJsonToResponse(jsonNode);
-    }
-
-    /**
-     * Uses the jsonNode to return a Response object.
-     * <p>
-     * if the jsonNode is a {@link SingleResponse}, it will create a {@link Response} from it
-     *
-     * @param jsonNode the jsonNode extracted from the client
-     * @return the response
-     */
-    private Response mapJsonToResponse(JsonNode jsonNode) {
-
-        Response xacmlResponse;
-        if (jsonNode.get("Response") instanceof ArrayNode) {
-            try {
-                xacmlResponse = mapper.treeToValue(jsonNode, Response.class);
-            } catch (JsonProcessingException e) {
-                throw new ResponseParsingException("Could not map JSON node to Response", e);
-            }
-        } else {
-            try {
-                Result singleResult = mapper.treeToValue(jsonNode, SingleResponse.class).getResult();
-                xacmlResponse = mapSingleResultToResponse(singleResult);
-            } catch (JsonProcessingException e) {
-                throw new ResponseParsingException("Could not map JSON node to Single Response", e);
-            }
-        }
-        return xacmlResponse;
     }
 }
