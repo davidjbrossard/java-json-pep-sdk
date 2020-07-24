@@ -30,7 +30,7 @@ public class FeignAuthZClient implements AuthZClient {
     public FeignAuthZClient(ClientConfiguration clientConfiguration, ObjectMapper mapper) {
 
         Objects.requireNonNull(clientConfiguration, "Client configuration must be non-null");
-        Objects.requireNonNull(clientConfiguration, "Client configuration must contain a non-null PDP URL");
+        Objects.requireNonNull(clientConfiguration.getPdpUrl(), "Client configuration must contain a non-null PDP URL");
 
         pdpFeignClient = Feign.builder()
                 .encoder(new JacksonEncoder(mapper))
