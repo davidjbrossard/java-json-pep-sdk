@@ -51,7 +51,6 @@ public class JaxRsAuthZClient implements AuthZClient {
 
         this.mapper = mapper;
         Client client = ClientBuilder.newClient();
-        client.register(new LoggingFeature(logger, Level.WARNING, Verbosity.PAYLOAD_ANY, null));
 
         // Username (and Password) should be provided if PDP requires Basic Authentication
         if (null != clientConfiguration.getUsername()) {
