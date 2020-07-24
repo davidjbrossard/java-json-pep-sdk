@@ -61,6 +61,7 @@ public class Result {
     @ApiModelProperty(value = "A list of attributes that were part of the request. The choice of which attributes are included here is made with the " +
         "IncludeInResult attribute of the Attribute elements of the request")
     @JsonProperty("Category")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Category> categories;
 
     /**

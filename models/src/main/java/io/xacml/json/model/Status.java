@@ -1,5 +1,6 @@
 package io.xacml.json.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -42,6 +43,7 @@ public class Status {
         value = "Additional status information"
     )
     @JsonProperty("StatusDetail")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     Object[] statusDetail;
 
 }

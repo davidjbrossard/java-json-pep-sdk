@@ -1,0 +1,8 @@
+{
+  "StatusCode": {
+    "Value": "urn:some:status",
+    "StatusCode": {
+      "Value": "urn:some:other:status"
+    }
+  }
+}

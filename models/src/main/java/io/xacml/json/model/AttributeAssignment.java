@@ -35,7 +35,7 @@ public class AttributeAssignment {
         required = true
     )
     @JsonProperty("Value")
-    String value;
+    Object value;
     
     /**
      * The {@link Category} identifier
@@ -49,7 +49,7 @@ public class AttributeAssignment {
     String category;
     
     /**
-     * The {@link Datatype} identifier
+     * The {@code DataType} identifier
      */
     @ApiModelProperty(
     		value = "The Attribute assignment's datatype (optional)",
@@ -57,5 +57,12 @@ public class AttributeAssignment {
     		required = false
     		)
     @JsonProperty("DataType")
-    String datatype;
+    String dataType;
+
+    /**
+     * The {@link Attribute} issuer
+     */
+    @ApiModelProperty(value = "The Attribute issuer (optional)")
+    @JsonProperty("Issuer")
+    String issuer;
 }

@@ -1,5 +1,6 @@
 package io.xacml.json.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -83,6 +84,7 @@ public class Category {
         value = "A sequence of attributes that apply to the category of the request"
     )
     @JsonProperty("Attribute")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     final List<Attribute> attributes = new ArrayList<>();
 
 
