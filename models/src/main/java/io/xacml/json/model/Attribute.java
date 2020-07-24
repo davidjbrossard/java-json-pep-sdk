@@ -14,6 +14,8 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Attribute {
 
+    public Attribute() { }
+
     public Attribute(String attributeId, Object value) {
         this.attributeId = attributeId;
         this.value = value;
