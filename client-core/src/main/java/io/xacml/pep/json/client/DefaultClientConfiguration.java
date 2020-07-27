@@ -1,7 +1,5 @@
 package io.xacml.pep.json.client;
 
-import lombok.Builder;
-
 import java.util.Objects;
 
 /**
@@ -9,7 +7,6 @@ import java.util.Objects;
  * <p>
  * Should be provided to the constructor of {@link AuthZClient} implementations where HTTP clients are built
  */
-@Builder
 public class DefaultClientConfiguration implements ClientConfiguration {
 
     /**
@@ -34,6 +31,16 @@ public class DefaultClientConfiguration implements ClientConfiguration {
      * The PEP user's password
      */
     String password;
+
+    DefaultClientConfiguration(String pdpUrl, String username, String password) {
+        this.pdpUrl = pdpUrl;
+        this.username = username;
+        this.password = password;
+    }
+
+    public static DefaultClientConfigurationBuilder builder() {
+        return new DefaultClientConfigurationBuilder();
+    }
 
     public String getPdpUrl() {
         return this.pdpUrl;
@@ -82,5 +89,37 @@ public class DefaultClientConfiguration implements ClientConfiguration {
 
     public String toString() {
         return "DefaultClientConfiguration(pdpUrl=" + this.getPdpUrl() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ")";
+    }
+
+    public static class DefaultClientConfigurationBuilder {
+        private String pdpUrl;
+        private String username;
+        private String password;
+
+        DefaultClientConfigurationBuilder() {
+        }
+
+        public DefaultClientConfigurationBuilder pdpUrl(String pdpUrl) {
+            this.pdpUrl = pdpUrl;
+            return this;
+        }
+
+        public DefaultClientConfigurationBuilder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public DefaultClientConfigurationBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public DefaultClientConfiguration build() {
+            return new DefaultClientConfiguration(pdpUrl, username, password);
+        }
+
+        public String toString() {
+            return "DefaultClientConfiguration.DefaultClientConfigurationBuilder(pdpUrl=" + this.pdpUrl + ", username=" + this.username + ", password=" + this.password + ")";
+        }
     }
 }

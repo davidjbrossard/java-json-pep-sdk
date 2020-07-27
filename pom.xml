@@ -35,12 +35,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
@@ -92,7 +86,6 @@
         <jersey-h2.version>2.27</jersey-h2.version>
         <junit.version>4.13</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <lombok.version>1.18.2</lombok.version>
         <!--<swagger-maven-plugin-version>3.1.8</swagger-maven-plugin-version>-->
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
         <maven.compiler.target>1.8</maven.compiler.target>
