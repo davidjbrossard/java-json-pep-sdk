@@ -5,16 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The Request Body for PDP Authorize Requests
  */
-@Data
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @ApiModel("The Request Body for PDP XACML Authorize Requests")
@@ -136,6 +135,9 @@ public class Request {
     @JsonProperty("MultiRequests")
     MultiRequests multiRequests;
 
+    public Request() {
+    }
+
     public boolean addCustomCategory(Category category) {
         return customCategories.add(category);
     }
@@ -175,5 +177,164 @@ public class Request {
     @Transient
     public boolean isMultiDecisionProfileRequest() {
         return null != multiRequests;
+    }
+
+    public boolean isReturnPolicyIdList() {
+        return this.returnPolicyIdList;
+    }
+
+    public boolean isCombinedDecision() {
+        return this.combinedDecision;
+    }
+
+    public String getXpathVersion() {
+        return this.xpathVersion;
+    }
+
+    public List<Category> getCustomCategories() {
+        return this.customCategories;
+    }
+
+    public List<Category> getResourceCategories() {
+        return this.resourceCategories;
+    }
+
+    public List<Category> getActionCategories() {
+        return this.actionCategories;
+    }
+
+    public List<Category> getEnvironmentCategories() {
+        return this.environmentCategories;
+    }
+
+    public List<Category> getAccessSubjectCategories() {
+        return this.accessSubjectCategories;
+    }
+
+    public List<Category> getRecipientSubjectCategories() {
+        return this.recipientSubjectCategories;
+    }
+
+    public List<Category> getIntermediarySubjectCategories() {
+        return this.intermediarySubjectCategories;
+    }
+
+    public List<Category> getCodeBaseCategories() {
+        return this.codeBaseCategories;
+    }
+
+    public List<Category> getRequestingMachineCategories() {
+        return this.requestingMachineCategories;
+    }
+
+    public MultiRequests getMultiRequests() {
+        return this.multiRequests;
+    }
+
+    public void setReturnPolicyIdList(boolean returnPolicyIdList) {
+        this.returnPolicyIdList = returnPolicyIdList;
+    }
+
+    public void setCombinedDecision(boolean combinedDecision) {
+        this.combinedDecision = combinedDecision;
+    }
+
+    public void setXpathVersion(String xpathVersion) {
+        this.xpathVersion = xpathVersion;
+    }
+
+    public void setCustomCategories(List<Category> customCategories) {
+        this.customCategories = customCategories;
+    }
+
+    public void setResourceCategories(List<Category> resourceCategories) {
+        this.resourceCategories = resourceCategories;
+    }
+
+    public void setActionCategories(List<Category> actionCategories) {
+        this.actionCategories = actionCategories;
+    }
+
+    public void setEnvironmentCategories(List<Category> environmentCategories) {
+        this.environmentCategories = environmentCategories;
+    }
+
+    public void setAccessSubjectCategories(List<Category> accessSubjectCategories) {
+        this.accessSubjectCategories = accessSubjectCategories;
+    }
+
+    public void setRecipientSubjectCategories(List<Category> recipientSubjectCategories) {
+        this.recipientSubjectCategories = recipientSubjectCategories;
+    }
+
+    public void setIntermediarySubjectCategories(List<Category> intermediarySubjectCategories) {
+        this.intermediarySubjectCategories = intermediarySubjectCategories;
+    }
+
+    public void setCodeBaseCategories(List<Category> codeBaseCategories) {
+        this.codeBaseCategories = codeBaseCategories;
+    }
+
+    public void setRequestingMachineCategories(List<Category> requestingMachineCategories) {
+        this.requestingMachineCategories = requestingMachineCategories;
+    }
+
+    public void setMultiRequests(MultiRequests multiRequests) {
+        this.multiRequests = multiRequests;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Request)) return false;
+        final Request other = (Request) o;
+        if (this.isReturnPolicyIdList() != other.isReturnPolicyIdList()) return false;
+        if (this.isCombinedDecision() != other.isCombinedDecision()) return false;
+        if (!Objects.equals(this.getXpathVersion(), other.getXpathVersion())) return false;
+        if (!Objects.equals(this.getCustomCategories(), other.getCustomCategories())) return false;
+        if (!Objects.equals(this.getResourceCategories(), other.getResourceCategories())) return false;
+        if (!Objects.equals(this.getActionCategories(), other.getActionCategories())) return false;
+        if (!Objects.equals(this.getEnvironmentCategories(), other.getEnvironmentCategories())) return false;
+        if (!Objects.equals(this.getAccessSubjectCategories(), other.getAccessSubjectCategories())) return false;
+        if (!Objects.equals(this.getRecipientSubjectCategories(), other.getRecipientSubjectCategories())) return false;
+        if (!Objects.equals(this.getIntermediarySubjectCategories(), other.getIntermediarySubjectCategories()))
+            return false;
+        if (!Objects.equals(this.getCodeBaseCategories(), other.getCodeBaseCategories())) return false;
+        if (!Objects.equals(this.getRequestingMachineCategories(), other.getRequestingMachineCategories()))
+            return false;
+        return Objects.equals(this.getMultiRequests(), other.getMultiRequests());
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        result = result * PRIME + (this.isReturnPolicyIdList() ? 79 : 97);
+        result = result * PRIME + (this.isCombinedDecision() ? 79 : 97);
+        final Object $xpathVersion = this.getXpathVersion();
+        result = result * PRIME + ($xpathVersion == null ? 43 : $xpathVersion.hashCode());
+        final Object $customCategories = this.getCustomCategories();
+        result = result * PRIME + ($customCategories == null ? 43 : $customCategories.hashCode());
+        final Object $resourceCategories = this.getResourceCategories();
+        result = result * PRIME + ($resourceCategories == null ? 43 : $resourceCategories.hashCode());
+        final Object $actionCategories = this.getActionCategories();
+        result = result * PRIME + ($actionCategories == null ? 43 : $actionCategories.hashCode());
+        final Object $environmentCategories = this.getEnvironmentCategories();
+        result = result * PRIME + ($environmentCategories == null ? 43 : $environmentCategories.hashCode());
+        final Object $accessSubjectCategories = this.getAccessSubjectCategories();
+        result = result * PRIME + ($accessSubjectCategories == null ? 43 : $accessSubjectCategories.hashCode());
+        final Object $recipientSubjectCategories = this.getRecipientSubjectCategories();
+        result = result * PRIME + ($recipientSubjectCategories == null ? 43 : $recipientSubjectCategories.hashCode());
+        final Object $intermediarySubjectCategories = this.getIntermediarySubjectCategories();
+        result = result * PRIME + ($intermediarySubjectCategories == null ? 43 : $intermediarySubjectCategories.hashCode());
+        final Object $codeBaseCategories = this.getCodeBaseCategories();
+        result = result * PRIME + ($codeBaseCategories == null ? 43 : $codeBaseCategories.hashCode());
+        final Object $requestingMachineCategories = this.getRequestingMachineCategories();
+        result = result * PRIME + ($requestingMachineCategories == null ? 43 : $requestingMachineCategories.hashCode());
+        final Object $multiRequests = this.getMultiRequests();
+        result = result * PRIME + ($multiRequests == null ? 43 : $multiRequests.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "Request(returnPolicyIdList=" + this.isReturnPolicyIdList() + ", combinedDecision=" + this.isCombinedDecision() + ", xpathVersion=" + this.getXpathVersion() + ", customCategories=" + this.getCustomCategories() + ", resourceCategories=" + this.getResourceCategories() + ", actionCategories=" + this.getActionCategories() + ", environmentCategories=" + this.getEnvironmentCategories() + ", accessSubjectCategories=" + this.getAccessSubjectCategories() + ", recipientSubjectCategories=" + this.getRecipientSubjectCategories() + ", intermediarySubjectCategories=" + this.getIntermediarySubjectCategories() + ", codeBaseCategories=" + this.getCodeBaseCategories() + ", requestingMachineCategories=" + this.getRequestingMachineCategories() + ", multiRequests=" + this.getMultiRequests() + ")";
     }
 }

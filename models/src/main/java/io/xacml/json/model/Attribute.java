@@ -4,17 +4,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+
+import java.util.Objects;
 
 /**
  * The central abstraction of the request context.  It contains attribute metadata and one or more attribute values.
  */
-@Data
 @ApiModel("The central abstraction of the request context.  It contains attribute meta-data and one or more attribute values")
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Attribute {
 
-    public Attribute() { }
+    public Attribute() {
+    }
 
     public Attribute(String attributeId, Object value) {
         this.attributeId = attributeId;
@@ -94,4 +95,73 @@ public class Attribute {
     @JsonProperty("IncludeInResult")
     boolean includeInResult = false;
 
+    public String getAttributeId() {
+        return this.attributeId;
+    }
+
+    public Object getValue() {
+        return this.value;
+    }
+
+    public String getDataType() {
+        return this.dataType;
+    }
+
+    public String getIssuer() {
+        return this.issuer;
+    }
+
+    public boolean isIncludeInResult() {
+        return this.includeInResult;
+    }
+
+    public void setAttributeId(String attributeId) {
+        this.attributeId = attributeId;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
+    }
+
+    public void setIncludeInResult(boolean includeInResult) {
+        this.includeInResult = includeInResult;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Attribute)) return false;
+        final Attribute other = (Attribute) o;
+        if (!Objects.equals(this.getAttributeId(), other.getAttributeId())) return false;
+        if (!Objects.equals(this.getValue(), other.getValue())) return false;
+        if (!Objects.equals(this.getDataType(), other.getDataType())) return false;
+        if (!Objects.equals(this.getIssuer(), other.getIssuer())) return false;
+        return this.isIncludeInResult() == other.isIncludeInResult();
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $attributeId = this.getAttributeId();
+        result = result * PRIME + ($attributeId == null ? 43 : $attributeId.hashCode());
+        final Object $value = this.getValue();
+        result = result * PRIME + ($value == null ? 43 : $value.hashCode());
+        final Object $dataType = this.getDataType();
+        result = result * PRIME + ($dataType == null ? 43 : $dataType.hashCode());
+        final Object $issuer = this.getIssuer();
+        result = result * PRIME + ($issuer == null ? 43 : $issuer.hashCode());
+        result = result * PRIME + (this.isIncludeInResult() ? 79 : 97);
+        return result;
+    }
+
+    public String toString() {
+        return "Attribute(attributeId=" + this.getAttributeId() + ", value=" + this.getValue() + ", dataType=" + this.getDataType() + ", issuer=" + this.getIssuer() + ", includeInResult=" + this.isIncludeInResult() + ")";
+    }
 }

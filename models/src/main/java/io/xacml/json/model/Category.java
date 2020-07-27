@@ -5,21 +5,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Specifies attributes of a Category (like subject, resource, action, environment or another category) by listing a sequence of {@link Attribute}s
  */
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @ApiModel("Specifies attributes of a Category (like subject, resource, action, environment or another category) by listing a sequence of Attributes")
-@Data
 public class Category {
 
     public Category() {
-
     }
 
     public Category(String id) {
@@ -108,4 +106,59 @@ public class Category {
         return attributes.add(new Attribute(attributeId, value, includeInResult, dataType));
     }
 
+    public String getCategoryId() {
+        return this.categoryId;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public List<Attribute> getAttributes() {
+        return this.attributes;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Category)) return false;
+        final Category other = (Category) o;
+        if (!Objects.equals(this.getCategoryId(), other.getCategoryId())) return false;
+        if (!Objects.equals(this.getId(), other.getId())) return false;
+        if (!Objects.equals(this.getContent(), other.getContent())) return false;
+        return Objects.equals(this.getAttributes(), other.getAttributes());
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $categoryId = this.getCategoryId();
+        result = result * PRIME + ($categoryId == null ? 43 : $categoryId.hashCode());
+        final Object $id = this.getId();
+        result = result * PRIME + ($id == null ? 43 : $id.hashCode());
+        final Object $content = this.getContent();
+        result = result * PRIME + ($content == null ? 43 : $content.hashCode());
+        final Object $attributes = this.getAttributes();
+        result = result * PRIME + ($attributes == null ? 43 : $attributes.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "Category(categoryId=" + this.getCategoryId() + ", id=" + this.getId() + ", content=" + this.getContent() + ", attributes=" + this.getAttributes() + ")";
+    }
 }
