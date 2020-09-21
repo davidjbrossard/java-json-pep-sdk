@@ -1,7 +1,7 @@
 # Java JSON PEP SDK for XACML
 
 This project provides a PEP SDK for Java, that generates a XACML request and response in accordance with the
-JSON Profile of XACML 1.1.
+JSON Profile of XACML 1.1 and 1.0.
 The project is organized into a number of submodule projects using Apache Maven. Please see their brief descriptions
 below, or see the submodule project's READMEs.
 
@@ -22,8 +22,3 @@ More information can be found at [OASIS's JSON Profile of XACML v 1.1](http://do
 ## How to Use the SDK
 
 See example code in the [Example code using clients and models](examples) subproject
-
-## Future work
-The following are a wishlist of items.
-- Java Builders for the request-related models to assist in creation of requests
-- Kotlin Builder to provide a DSL-style builder, useful in testing.
