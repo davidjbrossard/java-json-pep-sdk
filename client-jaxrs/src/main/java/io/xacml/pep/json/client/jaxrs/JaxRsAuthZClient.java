@@ -7,8 +7,6 @@ import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
 import io.xacml.pep.json.client.ResponseParsingException;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
-import org.glassfish.jersey.logging.LoggingFeature;
-import org.glassfish.jersey.logging.LoggingFeature.Verbosity;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -17,8 +15,6 @@ import javax.ws.rs.client.Invocation;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static io.xacml.pep.json.client.PDPConstants.AUTHORIZATION_ENDPOINT;
 import static io.xacml.pep.json.client.PDPConstants.CONTENT_TYPE;
@@ -32,8 +28,6 @@ import static io.xacml.pep.json.client.PDPConstants.CONTENT_TYPE;
  * @author djob
  */
 public class JaxRsAuthZClient implements AuthZClient {
-
-    private static Logger logger = Logger.getLogger(JaxRsAuthZClient.class.getName());
 
     private final Invocation.Builder requestInvocationBuilder;
 

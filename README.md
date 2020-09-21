@@ -5,20 +5,23 @@ JSON Profile of XACML 1.1 and 1.0.
 The project is organized into a number of submodule projects using Apache Maven. Please see their brief descriptions
 below, or see the submodule project's READMEs.
 
-The `models` can be used to `POST` a request to a Policy Decision Point (such as the Axiomatics Cloud Native PDP),
-using the client of your choice.
+The [`models`](models) can be used to `POST` a request to a Policy Decision Point (such as the Axiomatics Cloud Native PDP),
+using an HTTP client of your choice.
 
-Examples of clients are provided int the `client-*` projects
+The project contains sample clients based on popular HTTP client libraries [Feign](https://github.com/OpenFeign/feign)
+and [Jersey](https://github.com/eclipse-ee4j/jersey).
 
 ## Project Contents
+
+- [Request and Response Models](models)
 - [Client-Core](client-core)
-- [Client-JaxRs](client-jaxrs)
 - [Client-Feign](client-feign)
-- [Example code using clients and models](examples)
-- [Models](models)
+- [Example code using the Feign client](client-feign-example)
+- [Client-JaxRs](client-jaxrs)
+- [Example code using the JaxRs client](client-jaxrs-example)
 
 More information can be found at [OASIS's JSON Profile of XACML v 1.1](http://docs.oasis-open.org/xacml/xacml-json-http/v1.1/xacml-json-http-v1.1.html).
 
 ## How to Use the SDK
 
-See example code in the [Example code using clients and models](examples) subproject
+See sample code in the [client-feign-example](client-feign-example) and [client-jaxrs-example](client-jaxrs-example) subprojects.

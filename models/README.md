@@ -3,4 +3,4 @@ Models include annotations for Jackson, to override defaults provided by Jackson
 models contain OpenAPI (fka Swagger) annotations to allow consuming applications to generate OpenAPI specifications
 from code.
 
-See example code in [`examples`](../examples/src/main/java/io/xacml/pep/json/AuthZClientExamples.java) subproject
+See example code using the models in the [client-feign](../client-feign) and [client-jaxrs](../client-jaxrs) subprojects.

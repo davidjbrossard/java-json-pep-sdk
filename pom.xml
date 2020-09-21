@@ -11,8 +11,9 @@
     <modules>
         <module>client-core</module>
         <module>client-feign</module>
+        <module>client-feign-example</module>
         <module>client-jaxrs</module>
-        <module>examples</module>
+        <module>client-jaxrs-example</module>
         <module>models</module>
     </modules>
     <dependencies>

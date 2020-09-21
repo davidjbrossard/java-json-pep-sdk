@@ -12,14 +12,11 @@ import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * Builds a Feign based client to invoke the Policy Decision Point
  */
 public class FeignAuthZClient implements AuthZClient {
-
-    private static Logger logger = Logger.getLogger(FeignAuthZClient.class.getName());
 
     private final PDPFeignClient pdpFeignClient;
 

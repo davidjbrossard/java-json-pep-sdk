@@ -1,4 +1,4 @@
-package io.xacml.pep.json;
+package io.xacml.pep.json.client.jaxrs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.xacml.json.model.*;
@@ -6,8 +6,6 @@ import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
 import io.xacml.pep.json.client.DefaultClientConfiguration;
 import io.xacml.pep.json.client.PDPConstants;
-import io.xacml.pep.json.client.feign.FeignAuthZClient;
-import io.xacml.pep.json.client.jaxrs.JaxRsAuthZClient;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import javax.ws.rs.client.*;
@@ -16,13 +14,13 @@ import javax.ws.rs.client.*;
  * This class contains sample code using JAX-RS to invoke a Policy Decision Point.
  * It supports both the JSON Profile of XACML 1.0 and 1.1.
  */
-public class AuthZClientExamples {
+public class AuthZClientExample {
 
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        final String pdpUrl = "https://djob-hp:9443/asm-pdp";
-        final String username = "pdp-user";
-        final String password = "password";
+        final String pdpUrl = "http://localhost:8080";
+        final String username = "enforcer";
+        final String password = "secret";
 
         ClientConfiguration clientConfiguration = DefaultClientConfiguration.builder()
                 .pdpUrl(pdpUrl)
@@ -32,7 +30,6 @@ public class AuthZClientExamples {
 
         Request request = buildXACMLRequest();
 
-        callPDPWithFeignClient(clientConfiguration, mapper, request);
         callPDPWithJaxRsClient(clientConfiguration, mapper, request);
         callPDPWithJaxRsClientStepByStep(clientConfiguration, request);
     }
@@ -45,14 +42,6 @@ public class AuthZClientExamples {
         Request request = new Request();
         request.addAccessSubjectCategory(subject);
         return request;
-    }
-
-    private static void callPDPWithFeignClient(ClientConfiguration clientConfiguration, ObjectMapper mapper, Request request) {
-        AuthZClient authZClient = new FeignAuthZClient(clientConfiguration, mapper);
-        Response xacmlResponse = authZClient.makeAuthorizationRequest(request);
-        for (Result r : xacmlResponse.getResults()) {
-            System.out.println("Decision: " + r.getDecision());
-        }
     }
 
     private static void callPDPWithJaxRsClient(ClientConfiguration clientConfiguration, ObjectMapper mapper, Request request) {
