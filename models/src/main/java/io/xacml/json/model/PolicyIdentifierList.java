@@ -27,6 +27,7 @@ public class PolicyIdentifierList {
      */
     @ApiModelProperty(value = "List of policy set id references of policies which have been applicable to the request")
     @JsonProperty("PolicySetIdReference")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<IdReference> policySetIdReferences;
 
     public PolicyIdentifierList() {
