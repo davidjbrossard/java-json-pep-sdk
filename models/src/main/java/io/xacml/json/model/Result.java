@@ -2,6 +2,7 @@ package io.xacml.json.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -73,6 +74,7 @@ public class Result {
         "If the ReturnPolicyIdList attribute in the Request is true , a PDP that implements this optional feature MUST return a " +
         "list of all policies which were found to be fully applicable.")
     @JsonProperty("PolicyIdentifierList")
+    @JsonAlias("PolicyIdentifier")
     PolicyIdentifierList policyIdentifierList;
 
     public Result() {

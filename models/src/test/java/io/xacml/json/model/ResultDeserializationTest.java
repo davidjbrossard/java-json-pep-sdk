@@ -94,12 +94,21 @@ public class ResultDeserializationTest {
     }
 
     @Test
-    public void deserialize_with_policy_identifiers() throws IOException {
-        Result response = deserializeString("{ \"Decision\": \"Deny\", \"Status\": { \"StatusCode\": { \"Value\": \"urn:some:status\" } } }");
-        assertThat(response.getDecision(), equalTo(PDPDecision.DENY));
-        assertThat(response.getStatus(), notNullValue());
-        Status status = response.getStatus();
-        assertThat(status.getStatusCode().getValue(), equalTo("urn:some:status"));
+    public void deserialize_v11_with_policy_identifiers() throws IOException {
+        Result response = deserializeString("{ \"Decision\": \"Permit\", \"PolicyIdentifierList\": { \"PolicyIdReference\": [{\"Id\": \"id\"}], \"PolicySetIdReference\": [] } }");
+        assertThat(response.getDecision(), equalTo(PDPDecision.PERMIT));
+        assertThat(response.getPolicyIdentifierList(), notNullValue());
+        assertThat(response.getPolicyIdentifierList().getPolicyIdReferences(), contains(notNullValue()));
+        assertThat(response.getPolicyIdentifierList().getPolicySetIdReferences(), empty());
+    }
+
+    @Test
+    public void deserialize_v10_with_policy_identifiers() throws IOException {
+        Result response = deserializeString("{ \"Decision\": \"Permit\", \"PolicyIdentifier\": { \"PolicyIdReference\": [{\"Id\": \"id\"}], \"PolicySetIdReference\": [] } }");
+        assertThat(response.getDecision(), equalTo(PDPDecision.PERMIT));
+        assertThat(response.getPolicyIdentifierList(), notNullValue());
+        assertThat(response.getPolicyIdentifierList().getPolicyIdReferences(), contains(notNullValue()));
+        assertThat(response.getPolicyIdentifierList().getPolicySetIdReferences(), empty());
     }
 
     private Result deserializeString(String source) throws IOException {
