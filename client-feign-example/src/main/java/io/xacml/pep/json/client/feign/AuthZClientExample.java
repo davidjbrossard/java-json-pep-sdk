@@ -14,12 +14,12 @@ public class AuthZClientExample {
 
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        final String pdpUrl = "http://localhost:8080";
+        final String authorizationServiceUrl = "http://localhost:8080/authorize";
         final String username = "enforcer";
         final String password = "secret";
 
         ClientConfiguration clientConfiguration = DefaultClientConfiguration.builder()
-                .pdpUrl(pdpUrl)
+                .authorizationServiceUrl(authorizationServiceUrl)
                 .username(username)
                 .password(password)
                 .build();

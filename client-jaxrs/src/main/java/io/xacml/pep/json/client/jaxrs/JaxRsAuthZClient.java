@@ -41,7 +41,8 @@ public class JaxRsAuthZClient implements AuthZClient {
     public JaxRsAuthZClient(ClientConfiguration clientConfiguration, ObjectMapper mapper) {
 
         Objects.requireNonNull(clientConfiguration, "Client configuration must be non-null");
-        Objects.requireNonNull(clientConfiguration.getPdpUrl(), "Client configuration must contain a non-null PDP URL");
+        Objects.requireNonNull(clientConfiguration.getAuthorizationServiceUrl(),
+                "Client configuration must contain a non-null authorizationServiceUrl URL");
 
         this.mapper = mapper;
         Client client = ClientBuilder.newClient();
@@ -54,7 +55,7 @@ public class JaxRsAuthZClient implements AuthZClient {
             );
         }
         this.requestInvocationBuilder = client
-                .target(clientConfiguration.getPdpUrl() + AUTHORIZATION_ENDPOINT)
+                .target(clientConfiguration.getAuthorizationServiceUrl())
                 .request(CONTENT_TYPE);
     }
 

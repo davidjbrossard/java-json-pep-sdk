@@ -14,7 +14,7 @@ import static io.xacml.pep.json.client.PDPConstants.CONTENT_TYPE;
 public interface PDPFeignClient {
 
     @Headers("Content-Type: " + CONTENT_TYPE)
-    @RequestLine("POST " + AUTHORIZATION_ENDPOINT)
+    @RequestLine("POST")
     Response getResponse(Request request);
 
 }

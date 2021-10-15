@@ -18,12 +18,12 @@ public class AuthZClientExample {
 
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        final String pdpUrl = "http://localhost:8080";
+        final String authorizationServiceUrl = "http://localhost:8080/authorize";
         final String username = "enforcer";
         final String password = "secret";
 
         ClientConfiguration clientConfiguration = DefaultClientConfiguration.builder()
-                .pdpUrl(pdpUrl)
+                .authorizationServiceUrl(authorizationServiceUrl)
                 .username(username)
                 .password(password)
                 .build();
@@ -53,14 +53,14 @@ public class AuthZClientExample {
     }
 
     /**
-     * Show the full build of a JaxRs client and use to get a PDP response
+     * Show the full build of a JaxRs client and use it to get a PDP response
      */
     private static void callPDPWithJaxRsClientStepByStep(ClientConfiguration configuration, Request request) {
         // Enable, if needed, basic authentication
         HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(configuration.getUsername(), configuration.getPassword());
         Client client = ClientBuilder.newClient();
         client.register(feature);
-        WebTarget webTarget = client.target(configuration.getPdpUrl() + PDPConstants.AUTHORIZATION_ENDPOINT);
+        WebTarget webTarget = client.target(configuration.getAuthorizationServiceUrl());
         Invocation.Builder builder = webTarget.request(PDPConstants.CONTENT_TYPE);
 
         javax.ws.rs.core.Response response = builder.post(Entity.entity(request, "application/xacml+json"));

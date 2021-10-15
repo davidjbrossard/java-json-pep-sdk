@@ -6,15 +6,14 @@ package io.xacml.pep.json.client;
 public interface ClientConfiguration {
 
     /**
-     * URL of the the PDP.
-     * If running in application server like Tomcat where an application suffix is added, it should be included
+     * Full, absolute, URL of the authorization service.
      * <p>
      * Should not be null
      * <p>
-     * ex: https://api.pdp.example.io
-     * ex: https://api.example.io/asm-pdp
+     * ex: https://api.pdp.example.io/authorize
+     * ex: https://api.example.io/asm-pdp/authorize
      */
-    String getPdpUrl();
+    String getAuthorizationServiceUrl();
 
     /**
      * The username of the PEP user who can access the pdp for policy decisions.

@@ -8,17 +8,16 @@ import java.util.Objects;
  * Should be provided to the constructor of {@link AuthZClient} implementations where HTTP clients are built
  */
 public class DefaultClientConfiguration implements ClientConfiguration {
-
     /**
-     * URL of the the PDP.
-     * If running in application server like Tomcat where an application suffix is added, it should be included
+     * Full, absolute, URL of the authorization service.
      * <p>
      * Should not be null
      * <p>
-     * ex: https://api.pdp.example.io
-     * ex: https://api.example.io/asm-pdp
+     * ex: https://api.pdp.example.io/authorize
+     * <p>
+     * ex: https://api.example.io/asm-pdp/authorize
      */
-    String pdpUrl;
+    String authorizationServiceUrl;
 
     /**
      * The username of the PEP user who can access the pdp for policy decisions
@@ -32,8 +31,9 @@ public class DefaultClientConfiguration implements ClientConfiguration {
      */
     String password;
 
-    DefaultClientConfiguration(String pdpUrl, String username, String password) {
-        this.pdpUrl = pdpUrl;
+    DefaultClientConfiguration(String authorizationServiceUrl, String username, String password) {
+        this.authorizationServiceUrl =
+                Objects.requireNonNull(authorizationServiceUrl, "The authorization service URL cannot be null.");
         this.username = username;
         this.password = password;
     }
@@ -42,12 +42,14 @@ public class DefaultClientConfiguration implements ClientConfiguration {
         return new DefaultClientConfigurationBuilder();
     }
 
-    public String getPdpUrl() {
-        return this.pdpUrl;
+    @Override
+    public String getAuthorizationServiceUrl() {
+        return authorizationServiceUrl;
     }
 
-    public void setPdpUrl(String pdpUrl) {
-        this.pdpUrl = pdpUrl;
+    public void setAuthorizationServiceUrl(String url) {
+        this.authorizationServiceUrl =
+                Objects.requireNonNull(url, "The authorization service URL cannot be null.");
     }
 
     public String getUsername() {
@@ -70,7 +72,7 @@ public class DefaultClientConfiguration implements ClientConfiguration {
         if (o == this) return true;
         if (!(o instanceof DefaultClientConfiguration)) return false;
         final DefaultClientConfiguration other = (DefaultClientConfiguration) o;
-        if (!Objects.equals(this.getPdpUrl(), other.getPdpUrl())) return false;
+        if (!Objects.equals(this.getAuthorizationServiceUrl(), other.getAuthorizationServiceUrl())) return false;
         if (!Objects.equals(this.getUsername(), other.getUsername())) return false;
         return Objects.equals(this.getPassword(), other.getPassword());
     }
@@ -78,8 +80,8 @@ public class DefaultClientConfiguration implements ClientConfiguration {
     public int hashCode() {
         final int PRIME = 59;
         int result = 1;
-        final Object $pdpUrl = this.getPdpUrl();
-        result = result * PRIME + ($pdpUrl == null ? 43 : $pdpUrl.hashCode());
+        final Object $authorizationServiceUrl = this.getAuthorizationServiceUrl();
+        result = result * PRIME + ($authorizationServiceUrl == null ? 43 : $authorizationServiceUrl.hashCode());
         final Object $username = this.getUsername();
         result = result * PRIME + ($username == null ? 43 : $username.hashCode());
         final Object $password = this.getPassword();
@@ -88,11 +90,14 @@ public class DefaultClientConfiguration implements ClientConfiguration {
     }
 
     public String toString() {
-        return "DefaultClientConfiguration(pdpUrl=" + this.getPdpUrl() + ", username=" + this.getUsername() + ", password=" + this.getPassword() + ")";
+        return "DefaultClientConfiguration(authorizationServiceUrl=" + this.authorizationServiceUrl
+                + ", username=" + this.getUsername()
+                + ", password=" + this.getPassword() + ")";
     }
 
     public static class DefaultClientConfigurationBuilder {
         private String pdpUrl;
+        private String authorizationServiceUrl;
         private String username;
         private String password;
 
@@ -100,7 +105,20 @@ public class DefaultClientConfiguration implements ClientConfiguration {
         }
 
         public DefaultClientConfigurationBuilder pdpUrl(String pdpUrl) {
-            this.pdpUrl = pdpUrl;
+            if (authorizationServiceUrl != null) {
+                throw new IllegalStateException("An authorization service URL has already been set using authorizationServiceUrl()." +
+                        " Either use authorizationServiceUrl() or pdpUrl(), but not both.");
+            }
+            this.pdpUrl = Objects.requireNonNull(pdpUrl, "The authorization service URL cannot be null.");
+            return this;
+        }
+
+        public DefaultClientConfigurationBuilder authorizationServiceUrl(String url) {
+            if (pdpUrl != null) {
+                throw new IllegalStateException("A PDP URL has already been set using pdpUrl()." +
+                        " Either use authorizationServiceUrl() or pdpUrl(), but not both.");
+            }
+            this.authorizationServiceUrl = url;
             return this;
         }
 
@@ -115,11 +133,24 @@ public class DefaultClientConfiguration implements ClientConfiguration {
         }
 
         public DefaultClientConfiguration build() {
-            return new DefaultClientConfiguration(pdpUrl, username, password);
+            final String serviceUrl;
+            if (authorizationServiceUrl == null && pdpUrl == null) {
+                throw new IllegalStateException("An authorization service URL has not been set." +
+                        " Set it using this.authorizationService(url) this.pdpUrl(url)." +
+                        " Prefer using authorizationService(url), since pdpUrl(url) is deprecated.");
+            }
+            if (authorizationServiceUrl == null) {
+                serviceUrl = pdpUrl + PDPConstants.AUTHORIZATION_ENDPOINT;
+            } else {
+                serviceUrl = authorizationServiceUrl;
+            }
+            return new DefaultClientConfiguration(serviceUrl, username, password);
         }
 
         public String toString() {
-            return "DefaultClientConfiguration.DefaultClientConfigurationBuilder(pdpUrl=" + this.pdpUrl + ", username=" + this.username + ", password=" + this.password + ")";
+            return "DefaultClientConfiguration.DefaultClientConfigurationBuilder(pdpUrl=" + this.pdpUrl
+                    + ", authorizationServiceUrl=" + this.authorizationServiceUrl
+                    + ", username=" + this.username + ", password=" + this.password + ")";
         }
     }
 }
