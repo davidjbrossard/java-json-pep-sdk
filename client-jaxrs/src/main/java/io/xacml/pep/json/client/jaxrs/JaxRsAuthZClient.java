@@ -70,12 +70,6 @@ public class JaxRsAuthZClient implements AuthZClient {
      */
     @Override
     public Response makeAuthorizationRequest(Request request) {
-        javax.ws.rs.core.Response response = requestInvocationBuilder.post(Entity.entity(request, CONTENT_TYPE));
-
-        try {
-            return mapper.readValue((InputStream) response.getEntity(), Response.class);
-        } catch (IOException e) {
-            throw new ResponseParsingException("Could not read the response as a JSON node", e);
-        }
+        return requestInvocationBuilder.post(Entity.entity(request, CONTENT_TYPE), Response.class);
     }
 }
