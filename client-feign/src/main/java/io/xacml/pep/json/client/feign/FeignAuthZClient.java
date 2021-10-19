@@ -1,6 +1,5 @@
 package io.xacml.pep.json.client.feign;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Feign;
 import feign.auth.BasicAuthRequestInterceptor;
 import feign.jackson.JacksonDecoder;
@@ -24,18 +23,24 @@ public class FeignAuthZClient implements AuthZClient {
         this.pdpFeignClient = pdpFeignClient;
     }
 
-    public FeignAuthZClient(ClientConfiguration clientConfiguration, ObjectMapper mapper) {
+    public FeignAuthZClient(ClientConfiguration clientConfiguration) {
 
         Objects.requireNonNull(clientConfiguration, "Client configuration must be non-null");
         Objects.requireNonNull(clientConfiguration.getAuthorizationServiceUrl(),
                 "Client configuration must contain a non-null authorizationServiceUrl URL");
 
-        pdpFeignClient = Feign.builder()
-                .encoder(new JacksonEncoder(mapper))
-                .decoder(new JacksonDecoder(mapper))
-                .logger(new Slf4jLogger(FeignAuthZClient.class))
-                .requestInterceptor(new BasicAuthRequestInterceptor(clientConfiguration.getUsername(), clientConfiguration.getPassword()))
-                .target(PDPFeignClient.class, clientConfiguration.getAuthorizationServiceUrl());
+        Feign.Builder builder = Feign.builder()
+                .encoder(new JacksonEncoder())
+                .decoder(new JacksonDecoder())
+                .logger(new Slf4jLogger(FeignAuthZClient.class));
+
+        // Enable, if needed, basic authentication
+        if (null != clientConfiguration.getUsername() && null != clientConfiguration.getPassword()) {
+            builder.requestInterceptor(
+                    new BasicAuthRequestInterceptor(clientConfiguration.getUsername(), clientConfiguration.getPassword()));
+        }
+
+        pdpFeignClient = builder.target(PDPFeignClient.class, clientConfiguration.getAuthorizationServiceUrl());
 
     }
 

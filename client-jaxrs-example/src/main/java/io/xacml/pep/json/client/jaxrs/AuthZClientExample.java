@@ -54,15 +54,15 @@ public class AuthZClientExample {
      * Show the full build of a JaxRs client and use it to get a PDP response
      */
     private static void callPDPWithJaxRsClientStepByStep(ClientConfiguration configuration, Request request) {
-        // Enable, if needed, basic authentication
-        HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(configuration.getUsername(), configuration.getPassword());
         Client client = ClientBuilder.newClient();
-        client.register(feature);
+        // Enable, if needed, basic authentication
+        if (null != configuration.getUsername()) {
+            client.register(HttpAuthenticationFeature.basic(configuration.getUsername(), configuration.getPassword()));
+        }
         WebTarget webTarget = client.target(configuration.getAuthorizationServiceUrl());
         Invocation.Builder builder = webTarget.request(PDPConstants.CONTENT_TYPE);
 
-        javax.ws.rs.core.Response response = builder.post(Entity.entity(request, "application/xacml+json"));
-        Response xacmlResponse = response.readEntity(io.xacml.json.model.Response.class);
+        Response xacmlResponse = builder.post(Entity.entity(request, "application/xacml+json"), Response.class);
         for (Result r : xacmlResponse.getResults()) {
             System.out.println("Decision: " + r.getDecision());
         }

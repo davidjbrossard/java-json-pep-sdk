@@ -13,7 +13,6 @@ import io.xacml.pep.json.client.DefaultClientConfiguration;
 public class AuthZClientExample {
 
     public static void main(String[] args) {
-        ObjectMapper mapper = new ObjectMapper();
         final String authorizationServiceUrl = "http://localhost:8080/authorize";
         final String username = "enforcer";
         final String password = "secret";
@@ -26,7 +25,7 @@ public class AuthZClientExample {
 
         Request request = buildXACMLRequest();
 
-        callPDPWithFeignClient(clientConfiguration, mapper, request);
+        callPDPWithFeignClient(clientConfiguration, request);
     }
 
     private static Request buildXACMLRequest() {
@@ -39,8 +38,8 @@ public class AuthZClientExample {
         return request;
     }
 
-    private static void callPDPWithFeignClient(ClientConfiguration clientConfiguration, ObjectMapper mapper, Request request) {
-        AuthZClient authZClient = new FeignAuthZClient(clientConfiguration, mapper);
+    private static void callPDPWithFeignClient(ClientConfiguration clientConfiguration, Request request) {
+        AuthZClient authZClient = new FeignAuthZClient(clientConfiguration);
         Response xacmlResponse = authZClient.makeAuthorizationRequest(request);
         for (Result r : xacmlResponse.getResults()) {
             System.out.println("Decision: " + r.getDecision());
