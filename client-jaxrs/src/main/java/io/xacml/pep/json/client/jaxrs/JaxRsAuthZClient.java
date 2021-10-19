@@ -1,22 +1,17 @@
 package io.xacml.pep.json.client.jaxrs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.xacml.json.model.Request;
 import io.xacml.json.model.Response;
 import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
-import io.xacml.pep.json.client.ResponseParsingException;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 
-import static io.xacml.pep.json.client.PDPConstants.AUTHORIZATION_ENDPOINT;
 import static io.xacml.pep.json.client.PDPConstants.CONTENT_TYPE;
 
 /**
@@ -31,20 +26,16 @@ public class JaxRsAuthZClient implements AuthZClient {
 
     private final Invocation.Builder requestInvocationBuilder;
 
-    private final ObjectMapper mapper;
-
-    public JaxRsAuthZClient(Invocation.Builder requestInvocationBuilder, ObjectMapper mapper) {
+    public JaxRsAuthZClient(Invocation.Builder requestInvocationBuilder) {
         this.requestInvocationBuilder = requestInvocationBuilder;
-        this.mapper = mapper;
     }
 
-    public JaxRsAuthZClient(ClientConfiguration clientConfiguration, ObjectMapper mapper) {
+    public JaxRsAuthZClient(ClientConfiguration clientConfiguration) {
 
         Objects.requireNonNull(clientConfiguration, "Client configuration must be non-null");
         Objects.requireNonNull(clientConfiguration.getAuthorizationServiceUrl(),
                 "Client configuration must contain a non-null authorizationServiceUrl URL");
 
-        this.mapper = mapper;
         Client client = ClientBuilder.newClient();
 
         // Username (and Password) should be provided if PDP requires Basic Authentication

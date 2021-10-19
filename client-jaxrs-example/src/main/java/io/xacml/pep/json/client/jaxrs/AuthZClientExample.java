@@ -1,6 +1,5 @@
 package io.xacml.pep.json.client.jaxrs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.xacml.json.model.*;
 import io.xacml.pep.json.client.AuthZClient;
 import io.xacml.pep.json.client.ClientConfiguration;
@@ -17,7 +16,6 @@ import javax.ws.rs.client.*;
 public class AuthZClientExample {
 
     public static void main(String[] args) {
-        ObjectMapper mapper = new ObjectMapper();
         final String authorizationServiceUrl = "http://localhost:8080/authorize";
         final String username = "enforcer";
         final String password = "secret";
@@ -30,7 +28,7 @@ public class AuthZClientExample {
 
         Request request = buildXACMLRequest();
 
-        callPDPWithJaxRsClient(clientConfiguration, mapper, request);
+        callPDPWithJaxRsClient(clientConfiguration, request);
         callPDPWithJaxRsClientStepByStep(clientConfiguration, request);
     }
 
@@ -44,8 +42,8 @@ public class AuthZClientExample {
         return request;
     }
 
-    private static void callPDPWithJaxRsClient(ClientConfiguration clientConfiguration, ObjectMapper mapper, Request request) {
-        AuthZClient authZClient = new JaxRsAuthZClient(clientConfiguration, mapper);
+    private static void callPDPWithJaxRsClient(ClientConfiguration clientConfiguration, Request request) {
+        AuthZClient authZClient = new JaxRsAuthZClient(clientConfiguration);
         Response xacmlResponse = authZClient.makeAuthorizationRequest(request);
         for (Result r : xacmlResponse.getResults()) {
             System.out.println("Decision: " + r.getDecision());
