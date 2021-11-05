@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class FeignAuthZClient implements AuthZClient {
 
-    private final PDPFeignClient pdpFeignClient;
+    protected final PDPFeignClient pdpFeignClient;
 
     public FeignAuthZClient(PDPFeignClient pdpFeignClient) {
         this.pdpFeignClient = pdpFeignClient;

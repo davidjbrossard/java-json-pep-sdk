@@ -24,7 +24,7 @@ import static io.xacml.pep.json.client.PDPConstants.CONTENT_TYPE;
  */
 public class JaxRsAuthZClient implements AuthZClient {
 
-    private final Invocation.Builder requestInvocationBuilder;
+    protected final Invocation.Builder requestInvocationBuilder;
 
     public JaxRsAuthZClient(Invocation.Builder requestInvocationBuilder) {
         this.requestInvocationBuilder = requestInvocationBuilder;
