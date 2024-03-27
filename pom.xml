@@ -88,6 +88,7 @@
         <jersey-h2.version>2.31</jersey-h2.version>
         <junit.version>4.13</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
+        <!--<lombok.version>1.18.2</lombok.version>-->
         <!--<swagger-maven-plugin-version>3.1.8</swagger-maven-plugin-version>-->
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
