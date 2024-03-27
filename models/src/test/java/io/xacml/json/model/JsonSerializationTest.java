@@ -3,68 +3,54 @@ package io.xacml.json.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
-/**
- *
- */
-public class JsonTest {
-
-    private ObjectMapper mapper;
-
-    @Before
-    public void before() {
-        mapper = new ObjectMapper();
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-    }
+public class JsonSerializationTest {
+    private final ClassLoader classLoader = getClass().getClassLoader();
+    private final ObjectMapper mapper =
+            new ObjectMapper()
+                    .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                    .setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
     @Test
-    public void testJsonFormat_attribute_integer() throws IOException {
+    public void serialize_attribute_integer() throws IOException {
         Category category = new Category();
         category.addAttribute("document-id", 123, "integer");
 
-        System.out.println(mapper.writeValueAsString(category));
+        JsonNode serialized = serialize(category);
 
-        JsonNode objectJsonNode = mapper.convertValue(category, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/attribute-integer.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/attribute-integer.json")));
     }
 
     @Test
-    public void testJsonFormat_attribute_integer_inferred() throws IOException {
+    public void serialize_attribute_integer_inferred() throws IOException {
         Category category = new Category();
         category.addAttribute("document-id", 123);
 
-        System.out.println(mapper.writeValueAsString(category));
+        JsonNode serialized = serialize(category);
 
-        JsonNode objectJsonNode = mapper.convertValue(category, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/attribute-integer-inferred.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/attribute-integer-inferred.json")));
     }
 
     @Test
-    public void testJsonFormat_attribute_list_string() throws IOException {
+    public void serialize_attribute_list_string() throws IOException {
         Category category = new Category();
         category.addAttribute("urn:oasis:names:tc:xacml:2.0:subject:role", new String[]{"manager", "administrator"});
 
-        System.out.println(mapper.writeValueAsString(category));
+        JsonNode serialized = serialize(category);
 
-        JsonNode objectJsonNode = mapper.convertValue(category, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/attribute-list-string.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/attribute-list-string.json")));
     }
 
     @Test
-    public void testJsonFormat_attribute_xpath() throws IOException {
+    public void serialize_attribute_xpath() throws IOException {
 
         XPathExpression xPathExpression = new XPathExpression("urn:oasis:names:tc:xacml:3.0:attribute-category:resource", "md:record/md:patient/md:patientDoB");
         xPathExpression.addNamespaceDeclaration("urn:oasis:names:tc:xacml:3.0:core:schema:wd-17");
@@ -73,15 +59,13 @@ public class JsonTest {
         Category category = new Category();
         category.addAttribute("urn:oasis:names:tc:xacml:3.0:content-selector", xPathExpression, "xpathExpression");
 
-        System.out.println(mapper.writeValueAsString(category));
+        JsonNode serialized = serialize(category);
 
-        JsonNode objectJsonNode = mapper.convertValue(category, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/attribute-xpath.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/attribute-xpath.json")));
     }
 
     @Test
-    public void testJsonFormat_multirequests_object() throws IOException {
+    public void serialize_multirequests_object() throws IOException {
         List<String> requestReferenceIds0 = new ArrayList<>();
         requestReferenceIds0.add("foo1");
         requestReferenceIds0.add("bar1");
@@ -99,15 +83,13 @@ public class JsonTest {
         multiRequests.addRequestReferenceWithIds(requestReferenceIds1);
         multiRequests.addRequestReferenceWithIds(requestReferenceIds2);
 
-        System.out.println(mapper.writeValueAsString(multiRequests));
+        JsonNode serialized = serialize(multiRequests);
 
-        JsonNode objectJsonNode = mapper.convertValue(multiRequests, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/multirequests.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/multirequests.json")));
     }
 
     @Test
-    public void testJsonFormat_request() throws IOException {
+    public void serialize_request() throws IOException {
         Request request = new Request();
 
         Category accessSubjectCategory = new Category();
@@ -126,30 +108,26 @@ public class JsonTest {
         request.addActionCategory(actionCategory);
         request.addResourceCategory(resourceCategory);
 
-        System.out.println(mapper.writeValueAsString(request));
+        JsonNode serialized = serialize(request);
 
-        JsonNode objectJsonNode = mapper.convertValue(request, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/request.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/request.json")));
     }
 
     @Test
-    public void testJsonFormat_request_with_base64_encoded_content() throws IOException {
+    public void serialize_request_with_base64_encoded_content() throws IOException {
         Request request = new Request();
 
         Category accessSubjectCategory = new Category();
         accessSubjectCategory.setContent("PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8Y2F0YWxvZz48Ym9vayBpZD0iYmsxMDEiPjxhdXRob3I+R2FtYmFyZGVsbGEsIE1hdHRoZXc8L2F1dGhvcj48dGl0bGU+WE1MIERldmVsb3BlcidzIEd1aWRlPC90aXRsZT48Z2VucmU+Q29tcHV0ZXI8L2dlbnJlPjxwcmljZT40NC45NTwvcHJpY2U+PHB1Ymxpc2hfZGF0ZT4yMDAwLTEwLTAxPC9wdWJsaXNoX2RhdGU+PGRlc2NyaXB0aW9uPkFuIGluLWRlcHRoIGxvb2sgYXQgY3JlYXRpbmcgYXBwbGljYXRpb25zIHdpdGggWE1MLjwvZGVzY3JpcHRpb24+PC9ib29rPjwvY2F0YWxvZz4=");
         request.addAccessSubjectCategory(accessSubjectCategory);
 
-        System.out.println(mapper.writeValueAsString(request));
+        JsonNode serialized = serialize(request);
 
-        JsonNode objectJsonNode = mapper.convertValue(request, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/request-with-base64-encoded-content.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/request-with-base64-encoded-content.json")));
     }
 
     @Test
-    public void testJsonFormat_request_with_category() throws IOException {
+    public void serialize_request_with_category() throws IOException {
         Request request = new Request();
 
         Category customCategory0 = new Category();
@@ -176,30 +154,26 @@ public class JsonTest {
         request.addActionCategory(actionCategory0);
         request.addActionCategory(actionCategory1);
 
-        System.out.println(mapper.writeValueAsString(request));
+        JsonNode serialized = serialize(request);
 
-        JsonNode objectJsonNode = mapper.convertValue(request, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/request-with-category.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/request-with-category.json")));
     }
 
     @Test
-    public void testJsonFormat_request_with_escaped_xml_content() throws IOException {
+    public void serialize_request_with_escaped_xml_content() throws IOException {
         Request request = new Request();
 
         Category accessSubjectCategory = new Category();
         accessSubjectCategory.setContent("<?xml version=\"1.0\"?><catalog><book id=\"bk101\"><author>Gambardella, Matthew</author><title>XML Developer's Guide</title><genre>Computer</genre><price>44.95</price><publish_date>2000-10-01</publish_date><description>An in-depth look at creating applications with XML.</description></book></catalog>");
         request.addAccessSubjectCategory(accessSubjectCategory);
 
-        System.out.println(mapper.writeValueAsString(request));
+        JsonNode serialized = serialize(request);
 
-        JsonNode objectJsonNode = mapper.convertValue(request, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/request-with-escaped-xml-content.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/request-with-escaped-xml-content.json")));
     }
 
     @Test
-    public void testJsonFormat_request_with_multi_decisions() throws IOException {
+    public void serialize_request_with_multi_decisions() throws IOException {
         Request request = new Request();
 
         Category accessSubjectCategory = new Category("s1");
@@ -244,15 +218,13 @@ public class JsonTest {
         request.addActionCategory(actionCategory2);
         request.setMultiRequests(multiRequests);
 
-        System.out.println(mapper.writeValueAsString(request));
+        JsonNode serialized = serialize(request);
 
-        JsonNode objectJsonNode = mapper.convertValue(request, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/request-with-multi-decisions.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/request-with-multi-decisions.json")));
     }
 
     @Test
-    public void testJsonFormat_request_xpath() throws IOException {
+    public void serialize_request_xpath() throws IOException {
         Request request = new Request();
         request.setXpathVersion("http://www.w3.org/TR/1999/REC-xpath-19991116");
         Category customCategory0 = new Category();
@@ -260,15 +232,13 @@ public class JsonTest {
         customCategory0.addAttribute("some-custom-id", "value");
         request.addCustomCategory(customCategory0);
 
-        System.out.println(mapper.writeValueAsString(request));
+        JsonNode serialized = serialize(request);
 
-        JsonNode objectJsonNode = mapper.convertValue(request, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/request-xpath.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/request-xpath.json")));
     }
 
     @Test
-    public void testJsonFormat_response() throws IOException {
+    public void serialize_response() throws IOException {
         List<Result> results = new ArrayList<>();
 
         Result result = new Result();
@@ -278,15 +248,13 @@ public class JsonTest {
         Response response = new Response();
         response.setResults(results);
 
-        System.out.println(mapper.writeValueAsString(response));
+        JsonNode serialized = serialize(response);
 
-        JsonNode objectJsonNode = mapper.convertValue(response, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/response.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/response.json")));
     }
 
     @Test
-    public void testJsonFormat_response_with_multi_decisions() throws IOException {
+    public void serialize_response_with_multi_decisions() throws IOException {
 
         Status result0Status = new Status();
         result0Status.setStatusCode(new StatusCode("urn:oasis:names:tc:xacml:1.0:status:ok", new StatusCode("urn:oasis:names:tc:xacml:1.0:status:ok")));
@@ -335,15 +303,13 @@ public class JsonTest {
         Response response = new Response();
         response.setResults(results);
 
-        System.out.println(mapper.writeValueAsString(response));
+        JsonNode serialized = serialize(response);
 
-        JsonNode objectJsonNode = mapper.convertValue(response, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/response-with-multi-decisions.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/response-with-multi-decisions.json")));
     }
 
     @Test
-    public void testJsonFormat_response_with_status_code() throws IOException {
+    public void serialize_response_with_status_code() throws IOException {
         List<Result> results = new ArrayList<>();
 
         Status status = new Status();
@@ -357,11 +323,16 @@ public class JsonTest {
         Response response = new Response();
         response.setResults(results);
 
-        System.out.println(mapper.writeValueAsString(response));
+        JsonNode serialized = serialize(response);
 
-        JsonNode objectJsonNode = mapper.convertValue(response, JsonNode.class);
-        JsonNode fileJsonNode = mapper.readValue(new File("src/test/resources/json-examples/response-with-status-code.json"), JsonNode.class);
-        assertEquals(fileJsonNode, objectJsonNode);
+        assertThat(serialized, equalTo(expectedJsonValue("json-examples/response-with-status-code.json")));
     }
 
+    private JsonNode serialize(Object value) {
+        return mapper.convertValue(value, JsonNode.class);
+    }
+
+    private JsonNode expectedJsonValue(String source) throws IOException {
+        return mapper.readValue(classLoader.getResourceAsStream(source), JsonNode.class);
+    }
 }
