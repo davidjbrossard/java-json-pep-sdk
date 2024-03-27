@@ -86,7 +86,7 @@
         <jersey.version>2.31</jersey.version>
         <feign.version>11.6</feign.version>
         <jersey-h2.version>2.31</jersey-h2.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <!--<lombok.version>1.18.2</lombok.version>-->
         <!--<swagger-maven-plugin-version>3.1.8</swagger-maven-plugin-version>-->
